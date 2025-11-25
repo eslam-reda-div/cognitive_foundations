@@ -19,6 +19,7 @@ _*Equal contribution in alphabetical order_
 - [Overview](#overview)
 - [Assessing Behavioral Manifestation of Cognitive Elements](#assessing-behavioral-manifestation-of-cognitive-elements)
   - [Output Data Format](#output-data-format)
+- [Test-Time Reasoning Guidance](#test-time-reasoning-guidance)
 - [Citations](#citation)
 
 
@@ -32,7 +33,7 @@ We develop a taxonomy of **28 cognitive elements** spanning reasoning goals & pr
 
 <p align="center"><img src="https://github.com/pkargupta/cognitive_foundations/blob/main/figs/taxonomy.png" alt="Cognitive Foundations"/></p>
 
-Our evaluation encompasses **192,000 model traces** from **18 different LLMs** across text, vision, and audio modalities, alongside **54 human think-aloud traces** to enable direct comparison between human and machine reasoning patterns. We study both _well-structured_ (e.g., Algorithmic) to _ill-structured_ (e.g., Dilemma) problem types. We provide all span-level annotation prompts in `element_annotation`.
+Our evaluation encompasses **192K+ model traces** from **18 different LLMs** across text, vision, and audio modalities, alongside **54 human think-aloud traces** to enable direct comparison between human and machine reasoning patterns. We study both _well-structured_ (e.g., Algorithmic) to _ill-structured_ (e.g., Dilemma) problem types. We provide all span-level annotation prompts in `element_annotation`.
 
 ### Output Data Format
 
