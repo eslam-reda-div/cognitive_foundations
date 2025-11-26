@@ -543,7 +543,10 @@ class SpanTree:
             
             # NPMI = PMI / -log2(P(element, success))
             # Normalization ensures NPMI is in [-1, 1]
-            npmi = pmi / (-math.log2(p_element_and_success))
+            if (-math.log2(p_element_and_success)) == 0:
+                npmi = 0
+            else:
+                npmi = pmi / (-math.log2(p_element_and_success))
             
             npmi_scores[element] = {
                 'npmi': npmi,
@@ -648,9 +651,12 @@ class SpanTree:
             
             # PMI = log2(P(edge, success) / (P(edge) * P(success)))
             pmi = math.log2(p_edge_and_success / (p_edge * p_success))
-            
-            # NPMI = PMI / -log2(P(edge, success))
-            npmi = pmi / (-math.log2(p_edge_and_success))
+
+            if (-math.log2(p_edge_and_success)) == 0:
+                npmi = 0
+            else:
+                # NPMI = PMI / -log2(P(edge, success))
+                npmi = pmi / (-math.log2(p_edge_and_success))
             
             npmi_scores[edge_key] = {
                 'npmi': npmi,

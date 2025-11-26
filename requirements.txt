@@ -1,0 +1,9 @@
+json_repair==0.54.2
+matplotlib==3.10.7
+networkx==2.8.4
+numpy==2.2.6
+openai==2.8.1
+pydantic==2.12.4
+pygraphviz==1.14
+scipy==1.13.0
+tqdm==4.64.1

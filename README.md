@@ -17,15 +17,23 @@ _*Equal contribution in alphabetical order_
 ## Links
 
 - [Overview](#overview)
+  - [Installation](#installation)
 - [Assessing Behavioral Manifestation of Cognitive Elements](#assessing-behavioral-manifestation-of-cognitive-elements)
   - [Output Data Format](#output-data-format)
 - [Test-Time Reasoning Guidance](#test-time-reasoning-guidance)
+  - [Generating Guidance Templates](#generating-guidance-templates)
 - [Citations](#citation)
 
 
 ## Overview
 
 Our framework bridges **cognitive science** and **large language model (LLM) research** to systematically understand how LLMs reason and to diagnose/improve their reasoning processes, based on analysis of 192K model traces and 54 human think-aloud traces.
+
+### Installation
+The code is written in Python 3.10.9. The Python dependencies are summarized in the file `requirements.txt`. You can install them like this:
+```
+pip install -r requirements.txt
+```
 
 ## Assessing Behavioral Manifestation of Cognitive Elements
 
@@ -63,6 +71,40 @@ In order to run [test-time reasoning guidance](#test-time-reasoning-guidance), w
 ## Test-Time Reasoning Guidance
 
 We introduce **test-time reasoning guidance** as a targeted intervention to explicitly scaffold cognitive patterns predictive of reasoning success. In greedy fashion, we determine the most success-prone reasoning structure (subgraph) for each problem type, based on our empirical analysis. We convert each into a prompt which guides a model's reasoning process, improving performance by up to 26.7% on ill-structured problems while maintaining baseline performance on well-structured ones.
+
+### Generating Guidance Templates
+
+To generate test-time reasoning guidance templates for different problem types, run the `construct_graphs.py` script:
+
+```bash
+python construct_graphs.py \
+    --element_dir /path/to/span_annotations \
+    --prompt_template_dir structure_guidance/prompt_templates \
+    --output_dir reasoning_structure/output_consensus_graphs \
+    --path_to_question_info /path/to/question_info.json \
+    --max_nodes 7 \
+    --overlap_threshold 0.8 \
+    --parallel_threshold 20
+```
+
+**Arguments:**
+- `--element_dir`: Directory containing span-level annotation files (in the format described above)
+- `--prompt_template_dir`: Output directory for generated prompts (default: `structure_guidance/prompt_templates`)
+- `--output_dir`: Output directory for consensus graph visualizations (default: `reasoning_structure/output_consensus_graphs`)
+- `--path_to_question_info`: Path to JSON file containing question metadata
+- `--max_nodes`: Maximum number of nodes in the consensus graph (default: 7)
+- `--overlap_threshold`: Overlap threshold for span tree construction (default: 0.8)
+- `--parallel_threshold`: Parallel threshold for span tree construction (default: 20)
+- `--target_type`: Optional filter for specific problem type (default: processes all types)
+
+**Output:**
+
+The script generates prompts in `structure_guidance/prompt_templates` that can be input into any model (we used **Claude Sonnet 4.5**) to produce reasoning guidance templates. These templates are then used during test-time to scaffold the model's reasoning process.
+
+**Example Resources:**
+- Graph visualizations for each problem type (max_nodes=7): `reasoning_structure/output_consensus_graphs/7/`
+- Generated prompts for constructing guidance templates: `structure_guidance/prompt_templates/`
+- Final test-time guidance templates: `structure_guidance/guidance_templates/`
 
 ## Citation
 

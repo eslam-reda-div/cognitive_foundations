@@ -267,12 +267,9 @@ class ConsensusTreeFinder:
                         pad="0.5",
                         splines="spline") # Use curved lines
 
-        if font_name in A.graph_attr['fontname']:
-            A.graph_attr['fontname'] = font_name
-            A.node_attr['fontname'] = font_name
-            A.edge_attr['fontname'] = font_name
-        else:
-            pass
+        A.graph_attr['fontname'] = font_name
+        A.node_attr['fontname'] = font_name
+        A.edge_attr['fontname'] = font_name
 
         
         for node in graph.nodes():
